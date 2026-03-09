@@ -17,13 +17,23 @@ export default function AffiliateWidget({ manga }: { manga: MangaInfo }) {
 
   return (
     <div className="manga-panel !border-[#ffd23f] p-5 md:p-6 my-8">
-      <div className="flex items-center gap-2 mb-1">
-        <span className="text-lg">📚</span>
-        <h3 className="text-base font-black text-[#ffd23f]">
-          『{manga.title}』を読むなら
-        </h3>
+      {/* ヘッダー + ムード画像 */}
+      <div className="flex items-start gap-4 mb-4">
+        <img
+          src={`/images/manga/${manga.slug}.jpg`}
+          alt={manga.title}
+          className="w-20 h-20 object-cover rounded border border-[#2a2a3a] flex-shrink-0"
+        />
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-lg">📚</span>
+            <h3 className="text-base font-black text-[#ffd23f]">
+              『{manga.title}』を読むなら
+            </h3>
+          </div>
+          <p className="text-xs text-gray-500">各サービスのキャンペーンを利用してお得に読めます</p>
+        </div>
       </div>
-      <p className="text-xs text-gray-500 mb-5">各サービスのキャンペーンを利用してお得に読めます</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {links.map((link, i) => {
