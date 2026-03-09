@@ -6,8 +6,12 @@ import time
 import base64
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).parent.parent / ".env")
+
 # Gemini API設定
-API_KEY = "AIzaSyCjb5kSeZPJnP4mSJ3aSxcCvhjqUQDhPAE"
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
 MODEL = "gemini-2.0-flash-exp-image-generation"  # 画像生成対応モデル
 OUTPUT_DIR = Path(__file__).parent.parent / "public" / "images" / "manga"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
