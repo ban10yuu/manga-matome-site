@@ -6,6 +6,7 @@ import { getMangaBySlug } from '@/data/manga';
 import { CATEGORY_LABELS } from '@/lib/types';
 import AffiliateWidget from '@/components/AffiliateWidget';
 import AdBanner from '@/components/AdBanner';
+import MangaProductCard from '@/components/MangaProductCard';
 import CommentSection from '@/components/CommentSection';
 import ArticleCard from '@/components/ArticleCard';
 import Sidebar from '@/components/Sidebar';
@@ -151,13 +152,16 @@ export default async function ArticlePage({ params }: PageProps) {
                       ))}
                     </div>
 
-                    {/* Ad after every section (except last) */}
-                    {manga && i < article.sections.length - 1 && (
+                    {/* 商品カード: 2つ目のセクション後に表紙付きウィジェット */}
+                    {manga && i === 1 && (
+                      <MangaProductCard manga={manga} />
+                    )}
+
+                    {/* Ad after every section (except last, and not section 1 which has product card) */}
+                    {manga && i < article.sections.length - 1 && i !== 1 && (
                       i % 3 === 0 ? (
-                        // Every 3rd: full-width banner
                         <AdBanner manga={manga} variant={i + 1} size="full" />
                       ) : (
-                        // Others: compact banner
                         <AdBanner manga={manga} variant={i + 1} size="compact" />
                       )
                     )}

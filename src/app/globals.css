@@ -75,40 +75,121 @@ body::before {
   border-left: 4px solid #ff3a4f;
 }
 
-/* Article content styles — dark manga theme */
+/* Article content styles — dark manga theme (mobile-first) */
 .article-content h2 {
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   font-weight: 900;
   color: #eaeaf0;
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-  padding: 0.5rem 0 0.5rem 0.85rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 0.85rem;
   border-left: 4px solid #ff3a4f;
   border-bottom: none;
   background: linear-gradient(to right, rgba(255,58,79,0.08), transparent);
   position: relative;
+  line-height: 1.5;
 }
 
 .article-content h3 {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   color: #d0d0df;
-  margin-top: 1.75rem;
-  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
   padding-left: 0.75rem;
   border-left: 3px solid #ffd23f;
 }
 
 .article-content p {
   font-size: 0.9375rem;
-  line-height: 1.9;
-  color: #b0b0c0;
-  margin-bottom: 1rem;
+  line-height: 2.1;
+  color: #c0c0d0;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
 }
 
 .article-content strong {
   color: #ffd23f;
   font-weight: 700;
+}
+
+/* マーカー（下線強調） */
+.article-content .marker {
+  background: linear-gradient(transparent 60%, rgba(255,58,79,0.3) 60%);
+  font-weight: 700;
+  color: #eaeaf0;
+  padding: 0 2px;
+}
+
+.article-content .marker-gold {
+  background: linear-gradient(transparent 60%, rgba(255,210,63,0.25) 60%);
+  font-weight: 700;
+  color: #ffd23f;
+  padding: 0 2px;
+}
+
+/* まとめボックス（情報整理用） */
+.article-content .summary-box {
+  background: #1a1a28;
+  border: 2px solid #2a2a3a;
+  border-radius: 8px;
+  padding: 1.25rem 1.25rem 0.75rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.article-content .summary-box::before {
+  content: attr(data-title);
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 900;
+  color: #ff3a4f;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #2a2a3a;
+}
+
+.article-content .summary-box p {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.article-content .summary-box p::before {
+  content: '◉';
+  position: absolute;
+  left: 0;
+  color: #ff3a4f;
+  font-size: 0.75rem;
+}
+
+/* ハイライトボックス（重要ポイント） */
+.article-content .highlight-box {
+  background: linear-gradient(135deg, rgba(255,58,79,0.08), rgba(255,210,63,0.06));
+  border: 2px solid rgba(255,58,79,0.25);
+  border-radius: 8px;
+  padding: 1.25rem 1.25rem;
+  margin: 2rem 0;
+  font-size: 0.9375rem;
+  line-height: 2;
+  color: #eaeaf0;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* 注意・補足ボックス */
+.article-content .note-box {
+  background: #1a1a28;
+  border: 1px solid #2a2a3a;
+  border-left: 4px solid #ffd23f;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+  color: #b0b0c0;
+  line-height: 1.8;
 }
 
 /* Speech bubble blockquote */
@@ -117,11 +198,12 @@ body::before {
   border: 2px solid #2a2a3a;
   border-left: 4px solid #ff3a4f;
   border-radius: 2px 12px 12px 2px;
-  padding: 1.25rem 1.5rem 1.25rem 1.75rem;
-  margin: 1.5rem 0;
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  margin: 2rem 0;
   font-size: 0.9375rem;
   color: #d0d0df;
   position: relative;
+  line-height: 1.9;
 }
 .article-content blockquote::before {
   content: '❝';
@@ -131,6 +213,55 @@ body::before {
   font-size: 1.4rem;
   color: #ff3a4f;
   line-height: 1;
+}
+
+/* 漫画引用画像 */
+.article-content .manga-quote {
+  margin: 2rem 0;
+  text-align: center;
+}
+.article-content .manga-quote img {
+  max-width: 100%;
+  border: 2px solid #2a2a3a;
+  border-radius: 4px;
+}
+.article-content .manga-quote .cite {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  color: #6a6a80;
+  margin-top: 0.5rem;
+}
+
+/* スマホ最適化 */
+@media (max-width: 640px) {
+  .article-content h2 {
+    font-size: 1.125rem;
+    margin-top: 2.5rem;
+    padding: 0.625rem 0.75rem;
+  }
+  .article-content p {
+    font-size: 0.9375rem;
+    line-height: 2.2;
+    margin-bottom: 1.75rem;
+  }
+  .article-content blockquote {
+    padding: 1rem 1rem 1rem 1.25rem;
+    margin: 1.5rem 0;
+  }
+  .article-content .summary-box {
+    padding: 1rem 1rem 0.5rem;
+  }
+}
+
+/* デスクトップでは少し大きく */
+@media (min-width: 768px) {
+  .article-content h2 {
+    font-size: 1.375rem;
+  }
+  .article-content p {
+    font-size: 1rem;
+  }
 }
 
 /* Dark scrollbar */
