@@ -45,8 +45,12 @@ const allArticles: Article[] = [
   ...onePunchManArticles,
 ];
 
+// ビルド時の日付で公開済み記事のみフィルタ（未来日付の記事は非表示）
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
+const publishedArticles = allArticles.filter(a => a.publishedAt <= BUILD_DATE);
+
 export function getAllArticles(): Article[] {
-  return allArticles.sort(
+  return publishedArticles.sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
 }
@@ -56,23 +60,22 @@ export function getArticleBySlug(slug: string): Article | undefined {
 }
 
 export function getArticlesByManga(mangaSlug: string): Article[] {
-  return allArticles
+  return publishedArticles
     .filter(a => a.mangaSlug === mangaSlug)
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }
 
 export function getArticlesByCategory(category: ArticleCategory): Article[] {
-  return allArticles
+  return publishedArticles
     .filter(a => a.category === category)
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 }
 
 export function getRelatedArticles(article: Article, limit = 5): Article[] {
-  // Same manga first, then same category, then same tags
-  const sameManga = allArticles.filter(
+  const sameManga = publishedArticles.filter(
     a => a.mangaSlug === article.mangaSlug && a.slug !== article.slug
   );
-  const sameCategory = allArticles.filter(
+  const sameCategory = publishedArticles.filter(
     a =>
       a.category === article.category &&
       a.mangaSlug !== article.mangaSlug &&
@@ -83,7 +86,6 @@ export function getRelatedArticles(article: Article, limit = 5): Article[] {
 }
 
 export function getPopularArticles(limit = 10): Article[] {
-  // For now, return recent articles as "popular"
   return getAllArticles().slice(0, limit);
 }
 
@@ -93,7 +95,7 @@ export function getAllSlugs(): string[] {
 
 export function searchArticles(query: string): Article[] {
   const q = query.toLowerCase();
-  return allArticles.filter(
+  return publishedArticles.filter(
     a =>
       a.title.toLowerCase().includes(q) ||
       a.excerpt.toLowerCase().includes(q) ||
