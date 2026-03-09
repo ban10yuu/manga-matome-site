@@ -61,8 +61,7 @@ export const metadata: Metadata = {
     canonical: 'https://manga-matome-site.vercel.app',
   },
   verification: {
-    // Google Search Console認証後にここにID追加
-    // google: 'verification-id',
+    google: 'QNT_EwkmJ039_aVzqr1sKc_hySyn-ZpgLZDtAgxtsNo',
   },
 };
 
