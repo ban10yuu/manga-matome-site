@@ -1,0 +1,30 @@
+name: Daily Vercel Rebuild
+
+on:
+  schedule:
+    # 毎日 21:00 UTC = JST 06:00
+    - cron: '0 21 * * *'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger manga-matome-site rebuild
+        run: |
+          curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_MANGA }}"
+          echo "manga-matome-site rebuild triggered"
+
+      - name: Trigger vod-navi-site rebuild
+        run: |
+          curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_VOD }}"
+          echo "vod-navi-site rebuild triggered"
+
+      - name: Trigger fukusen-lab rebuild
+        run: |
+          if [ -n "${{ secrets.VERCEL_DEPLOY_HOOK_FUKUSEN }}" ]; then
+            curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_FUKUSEN }}"
+            echo "fukusen-lab rebuild triggered"
+          else
+            echo "fukusen-lab hook not set yet, skipping"
+          fi
