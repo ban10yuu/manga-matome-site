@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ArticleCard from '@/components/ArticleCard';
 import Sidebar from '@/components/Sidebar';
+import GoogleAd from '@/components/GoogleAd';
 import { getAllArticles } from '@/lib/articles';
 import { mangaList } from '@/data/manga';
 import { CATEGORY_LABELS } from '@/lib/types';
@@ -58,6 +59,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GoogleAd: After hero */}
+      <div className="bg-[#0c0c14] py-4">
+        <div className="mx-auto max-w-7xl px-4">
+          <GoogleAd className="my-2" />
+        </div>
+      </div>
+
       {/* Manga Tags */}
       <section className="bg-[#0c0c14] border-b border-[#2a2a3a] py-3 overflow-x-auto">
         <div className="mx-auto max-w-7xl px-4">
@@ -105,6 +113,9 @@ export default function Home() {
                 <ArticleCard key={article.slug} article={article} />
               ))}
             </div>
+
+            {/* GoogleAd: After article grid */}
+            <GoogleAd className="mt-6" />
 
             {/* Load More */}
             {articles.length > 15 && (

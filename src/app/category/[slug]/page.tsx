@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getAllArticles, getArticlesByCategory } from '@/lib/articles';
 import { CATEGORY_LABELS, ArticleCategory } from '@/lib/types';
 import ArticleCard from '@/components/ArticleCard';
+import GoogleAd from '@/components/GoogleAd';
 import Sidebar from '@/components/Sidebar';
 
 interface PageProps {
@@ -84,6 +85,9 @@ export default async function CategoryPage({ params }: PageProps) {
         ))}
       </div>
 
+      {/* GoogleAd: After heading */}
+      <GoogleAd className="mb-6" />
+
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 min-w-0">
           {articles.length === 0 ? (
@@ -100,6 +104,9 @@ export default async function CategoryPage({ params }: PageProps) {
               ))}
             </div>
           )}
+
+          {/* GoogleAd: After articles */}
+          <GoogleAd className="mt-6" />
         </div>
 
         <div className="lg:w-80 flex-shrink-0">

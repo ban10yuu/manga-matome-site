@@ -6,6 +6,7 @@ import { getMangaBySlug } from '@/data/manga';
 import { CATEGORY_LABELS } from '@/lib/types';
 import AffiliateWidget from '@/components/AffiliateWidget';
 import AdBanner from '@/components/AdBanner';
+import GoogleAd from '@/components/GoogleAd';
 import MangaProductCard from '@/components/MangaProductCard';
 import CommentSection from '@/components/CommentSection';
 import ArticleCard from '@/components/ArticleCard';
@@ -121,6 +122,9 @@ export default async function ArticlePage({ params }: PageProps) {
               {/* Ad: Top banner after title */}
               {manga && <AdBanner manga={manga} variant={0} size="full" />}
 
+              {/* GoogleAd: After excerpt / before TOC */}
+              <GoogleAd className="my-6" />
+
               {/* Table of Contents */}
               {article.sections.length > 2 && (
                 <div className="bg-[#1e1e2a] rounded p-4 mb-8 border border-[#2a2a3a]">
@@ -141,6 +145,9 @@ export default async function ArticlePage({ params }: PageProps) {
                 </div>
               )}
 
+              {/* GoogleAd: After TOC */}
+              <GoogleAd className="mb-8" />
+
               {/* Article Content with ads between every section */}
               <div className="article-content">
                 {article.sections.map((section, i) => (
@@ -152,10 +159,16 @@ export default async function ArticlePage({ params }: PageProps) {
                       ))}
                     </div>
 
+                    {/* GoogleAd: After section 1 (index 0) */}
+                    {i === 0 && <GoogleAd className="my-8" />}
+
                     {/* 商品カード: 2つ目のセクション後に表紙付きウィジェット */}
                     {manga && i === 1 && (
                       <MangaProductCard manga={manga} />
                     )}
+
+                    {/* GoogleAd: After section 3 (index 2) */}
+                    {i === 2 && <GoogleAd className="my-8" />}
 
                     {/* Ad after every section (except last, and not section 1 which has product card) */}
                     {manga && i < article.sections.length - 1 && i !== 1 && (
@@ -168,6 +181,9 @@ export default async function ArticlePage({ params }: PageProps) {
                   </div>
                 ))}
               </div>
+
+              {/* GoogleAd: After article body, before affiliate */}
+              <GoogleAd className="my-8" />
 
               {/* Main Affiliate CTA at end */}
               {manga && <AffiliateWidget manga={manga} />}
@@ -188,8 +204,14 @@ export default async function ArticlePage({ params }: PageProps) {
                 ))}
               </div>
 
+              {/* GoogleAd: After tags, before comments */}
+              <GoogleAd className="mt-6" />
+
               {/* Comments */}
               <CommentSection articleSlug={article.slug} />
+
+              {/* GoogleAd: After comments, before related */}
+              <GoogleAd className="mt-6" />
             </div>
 
             {/* Ad: Between article and related */}

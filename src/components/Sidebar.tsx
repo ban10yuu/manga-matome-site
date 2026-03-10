@@ -4,6 +4,7 @@ import { mangaList } from '@/data/manga';
 import { getPopularArticles } from '@/lib/articles';
 import { generalAffiliates } from '@/data/affiliates';
 import AdBanner from '@/components/AdBanner';
+import GoogleAd from '@/components/GoogleAd';
 
 export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
   const popularArticles = getPopularArticles(5);
@@ -91,6 +92,9 @@ export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
 
       {/* Ad Banner: Mid sidebar */}
       {manga && <AdBanner manga={manga} variant={3} size="medium" />}
+
+      {/* GoogleAd: Between affiliate and popular sections */}
+      <GoogleAd format="rectangle" />
 
       {/* Popular Articles */}
       <div className="manga-panel p-5">
@@ -203,6 +207,9 @@ export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
 
       {/* Ad Banner: Bottom of sidebar */}
       {manga && <AdBanner manga={manga} variant={6} size="medium" />}
+
+      {/* GoogleAd: Bottom of sidebar */}
+      <GoogleAd format="rectangle" />
     </aside>
   );
 }

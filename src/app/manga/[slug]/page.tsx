@@ -5,6 +5,7 @@ import { mangaList, getMangaBySlug } from '@/data/manga';
 import { getArticlesByManga } from '@/lib/articles';
 import { getAffiliateLinks } from '@/data/affiliates';
 import ArticleCard from '@/components/ArticleCard';
+import GoogleAd from '@/components/GoogleAd';
 import Sidebar from '@/components/Sidebar';
 import { mangaHasImage } from '@/lib/images';
 
@@ -100,6 +101,9 @@ export default async function MangaPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* GoogleAd: After manga header */}
+      <GoogleAd className="mb-8" />
+
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Articles */}
         <div className="flex-1 min-w-0">
@@ -120,6 +124,9 @@ export default async function MangaPage({ params }: PageProps) {
               ))}
             </div>
           )}
+
+          {/* GoogleAd: After articles */}
+          <GoogleAd className="mt-6" />
         </div>
 
         {/* Sidebar */}
