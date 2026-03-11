@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <>
       {/* Hero with speed lines */}
-      <section className="speed-lines bg-gradient-to-b from-[#0a0a12] via-[#12121d] to-[#0c0c14] py-16 border-b-2 border-[#2a2a3a]">
+      <section className="bg-[#0c0c14] py-16 border-b-2 border-[#2a2a3a]">
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-10">
             <p className="text-[#ff3a4f] text-xs font-black tracking-[0.3em] uppercase mb-3">

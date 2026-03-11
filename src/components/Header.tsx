@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0a0a12]/95 backdrop-blur-md text-white border-b-2 border-[#ff3a4f]">
+    <header className="sticky top-0 z-50 bg-[#0a0a12] text-white border-b-2 border-[#ff3a4f]">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
@@ -40,7 +40,7 @@ export default function Header() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div className="absolute left-0 top-full mt-1 w-64 bg-[#16161f] border-2 border-[#2a2a3a] rounded shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 max-h-96 overflow-y-auto">
+              <div className="absolute left-0 top-full mt-1 w-64 bg-[#16161f] border-2 border-[#2a2a3a] rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 max-h-96 overflow-y-auto">
                 {mangaList.map(manga => (
                   <Link
                     key={manga.slug}

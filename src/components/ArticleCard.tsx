@@ -24,10 +24,10 @@ export default function ArticleCard({ article, showManga = true }: { article: Ar
           <img
             src={`/images/manga/${article.mangaSlug}.jpg`}
             alt=""
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#16161f] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[#16161f]/60" />
         </Link>
       ) : (
         <div className="h-1" style={{ backgroundColor: manga?.coverColor || '#ff3a4f' }} />
