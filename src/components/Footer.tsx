@@ -116,6 +116,18 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* 関連サイト */}
+        <div className="mt-10 pt-6 border-t border-[#2a2a3a]">
+          <h3 className="text-xs font-black text-gray-500 mb-3 tracking-widest uppercase">関連サイト</h3>
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+            <a href="https://anime-review-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-500 hover:text-[#ff3a4f] transition-colors">Anime Review Lab</a>
+            <a href="https://ai-tools-site-dusky.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-500 hover:text-[#ff3a4f] transition-colors">AIツールラボ</a>
+            <a href="https://vod-navi-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-500 hover:text-[#ff3a4f] transition-colors">動画配信ナビ</a>
+            <a href="https://fukusen-lab.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-500 hover:text-[#ff3a4f] transition-colors">伏線回収ラボ</a>
+            <a href="https://joseikin-navi-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-500 hover:text-[#ff3a4f] transition-colors">助成金ナビ</a>
+          </div>
+        </div>
+
         <div className="mt-12 pt-8 border-t border-[#2a2a3a] text-center text-xs text-gray-600">
           <div className="flex justify-center gap-4 mb-4">
             <Link href="/privacy" className="text-gray-500 hover:text-[#ff3a4f] transition-colors">
