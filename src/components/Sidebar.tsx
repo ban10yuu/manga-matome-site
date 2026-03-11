@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { MangaInfo } from '@/lib/types';
+import { MangaInfo, CATEGORY_LABELS } from '@/lib/types';
+import type { ArticleCategory } from '@/lib/types';
 import { mangaList } from '@/data/manga';
 import { getPopularArticles } from '@/lib/articles';
 import { generalAffiliates } from '@/data/affiliates';
@@ -7,7 +8,7 @@ import AdBanner from '@/components/AdBanner';
 import GoogleAd from '@/components/GoogleAd';
 
 export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
-  const popularArticles = getPopularArticles(5);
+  const popularArticles = getPopularArticles(10);
 
   return (
     <aside className="space-y-6">
@@ -96,10 +97,10 @@ export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
       {/* GoogleAd: Between affiliate and popular sections */}
       <GoogleAd format="rectangle" />
 
-      {/* Popular Articles */}
+      {/* Popular Articles Ranking */}
       <div className="manga-panel p-5">
         <h3 className="text-sm font-black text-[#ff3a4f] mb-4 flex items-center gap-2">
-          ◆ 人気の考察
+          ◆ 人気の考察ランキング
         </h3>
         <ol className="space-y-3">
           {popularArticles.map((article, i) => (
@@ -180,6 +181,32 @@ export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
               </div>
             </a>
           ))}
+        </div>
+      </div>
+
+      {/* Category Navigation */}
+      <div className="manga-panel p-5">
+        <h3 className="text-sm font-black text-[#00d4ff] mb-4 flex items-center gap-2">
+          ◆ カテゴリ別で探す
+        </h3>
+        <div className="space-y-1.5">
+          {(Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][]).map(([key, label]) => (
+            <Link
+              key={key}
+              href={`/category/${key}`}
+              className="flex items-center gap-2 py-1.5 px-2 rounded text-sm text-gray-500 hover:bg-[#1e1e2a] hover:text-[#00d4ff] transition-colors"
+            >
+              <span className="text-[#00d4ff]">▸</span>
+              {label}
+            </Link>
+          ))}
+          <Link
+            href="/category/all"
+            className="flex items-center gap-2 py-1.5 px-2 rounded text-sm text-gray-400 hover:bg-[#1e1e2a] hover:text-[#ff3a4f] transition-colors font-bold"
+          >
+            <span className="text-[#ff3a4f]">▸</span>
+            すべての記事を見る
+          </Link>
         </div>
       </div>
 

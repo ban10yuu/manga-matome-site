@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Article, CATEGORY_LABELS } from '@/lib/types';
 import { getMangaBySlug } from '@/data/manga';
 import { mangaHasImage } from '@/lib/images';
+import { tagToSlug } from '@/lib/articles';
 
 const DARK_CATEGORY_COLORS: Record<string, string> = {
   character: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
@@ -66,9 +67,13 @@ export default function ArticleCard({ article, showManga = true }: { article: Ar
         {/* Tags + Read more */}
         <div className="flex items-center gap-2 flex-wrap">
           {article.tags.slice(0, 3).map(tag => (
-            <span key={tag} className="text-[10px] text-gray-600 before:content-['#']">
+            <Link
+              key={tag}
+              href={`/tag/${tagToSlug(tag)}`}
+              className="text-[10px] text-gray-600 before:content-['#'] hover:text-[#ff3a4f] transition-colors"
+            >
               {tag}
-            </span>
+            </Link>
           ))}
           <Link
             href={`/article/${article.slug}`}

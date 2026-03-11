@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getAllSlugs, getArticleBySlug, getRelatedArticles } from '@/lib/articles';
+import { getAllSlugs, getArticleBySlug, getRelatedArticles, getArticlesByManga, tagToSlug } from '@/lib/articles';
 import { getMangaBySlug } from '@/data/manga';
-import { CATEGORY_LABELS } from '@/lib/types';
+import { CATEGORY_LABELS, ArticleCategory } from '@/lib/types';
 import AffiliateWidget from '@/components/AffiliateWidget';
 import AdBanner from '@/components/AdBanner';
 import GoogleAd from '@/components/GoogleAd';
@@ -11,6 +11,7 @@ import MangaProductCard from '@/components/MangaProductCard';
 import CommentSection from '@/components/CommentSection';
 import ArticleCard from '@/components/ArticleCard';
 import Sidebar from '@/components/Sidebar';
+import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd, buildFaqFromSections } from '@/components/JsonLd';
 
 const DARK_CATEGORY_COLORS: Record<string, string> = {
   character: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
@@ -33,15 +34,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = getArticleBySlug(slug);
   if (!article) return {};
   const manga = getMangaBySlug(article.mangaSlug);
+  const mangaTitle = manga?.title || '';
+  const categoryName = CATEGORY_LABELS[article.category];
 
-  const canonicalUrl = `https://manga-matome-site.vercel.app/article/${slug}`;
+  const richDescription = manga
+    ? `${mangaTitle}の${categoryName}「${article.title}」を徹底解説。${article.excerpt}`
+    : article.excerpt;
+  const description = richDescription.length > 160 ? richDescription.slice(0, 157) + '...' : richDescription;
+
+  const keywords = [
+    ...article.tags,
+    ...(manga ? [
+      mangaTitle,
+      manga.titleEn,
+      `${mangaTitle} 考察`,
+      `${mangaTitle} ネタバレ`,
+      `${mangaTitle} ${categoryName}`,
+      `${mangaTitle} まとめ`,
+    ] : []),
+    categoryName,
+    '漫画 考察',
+    'マンガ考察',
+  ];
+
+  const canonicalUrl = `https://manga-matome-site-phi.vercel.app/article/${slug}`;
   return {
     title: article.title,
-    description: article.excerpt,
-    keywords: article.tags,
+    description,
+    keywords,
     openGraph: {
       title: article.title,
-      description: article.excerpt,
+      description,
       type: 'article',
       publishedTime: article.publishedAt,
       tags: article.tags,
@@ -51,7 +74,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: 'summary',
       title: article.title,
-      description: article.excerpt,
+      description,
     },
     alternates: {
       canonical: canonicalUrl,
@@ -65,7 +88,13 @@ export default async function ArticlePage({ params }: PageProps) {
   if (!article) notFound();
 
   const manga = getMangaBySlug(article.mangaSlug);
-  const relatedArticles = getRelatedArticles(article, 4);
+  const sameMangaArticles = manga
+    ? getArticlesByManga(article.mangaSlug).filter(a => a.slug !== article.slug).slice(0, 4)
+    : [];
+  const sameMangaSlugs = new Set(sameMangaArticles.map(a => a.slug));
+  const relatedArticles = getRelatedArticles(article, 10)
+    .filter(a => !sameMangaSlugs.has(a.slug))
+    .slice(0, 6);
 
   return (
     <>
@@ -195,12 +224,13 @@ export default async function ArticlePage({ params }: PageProps) {
               <div className="flex items-center gap-2 flex-wrap mt-8 pt-6 border-t border-[#2a2a3a]">
                 <span className="text-xs text-gray-600 font-bold">タグ:</span>
                 {article.tags.map(tag => (
-                  <span
+                  <Link
                     key={tag}
-                    className="text-[10px] text-gray-500 bg-[#1e1e2a] border border-[#2a2a3a] px-2.5 py-1 rounded"
+                    href={`/tag/${tagToSlug(tag)}`}
+                    className="text-[10px] text-gray-500 bg-[#1e1e2a] border border-[#2a2a3a] px-2.5 py-1 rounded hover:text-[#ff3a4f] hover:border-[#ff3a4f]/30 transition-colors"
                   >
                     #{tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
 
@@ -217,12 +247,35 @@ export default async function ArticlePage({ params }: PageProps) {
             {/* Ad: Between article and related */}
             {manga && <AdBanner manga={manga} variant={6} size="full" />}
 
-            {/* Related Articles */}
+            {/* Same Manga Articles */}
+            {manga && sameMangaArticles.length > 0 && (
+              <div className="mt-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-black text-white flex items-center gap-2">
+                    <span className="text-[#ff3a4f]">▎</span>
+                    {manga.title}の他の考察
+                  </h2>
+                  <Link
+                    href={`/manga/${manga.slug}`}
+                    className="text-xs font-bold text-[#ff3a4f] hover:text-[#ffd23f] transition-colors"
+                  >
+                    {manga.title}の記事一覧 →
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {sameMangaArticles.map(a => (
+                    <ArticleCard key={a.slug} article={a} showManga={false} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Related Articles (cross-manga) */}
             {relatedArticles.length > 0 && (
               <div className="mt-8">
                 <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
                   <span className="text-[#ff3a4f]">▎</span>
-                  関連する考察
+                  おすすめの考察記事
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {relatedArticles.map(a => (
@@ -231,6 +284,29 @@ export default async function ArticlePage({ params }: PageProps) {
                 </div>
               </div>
             )}
+
+            {/* Category Navigation */}
+            <div className="mt-8 manga-panel !bg-[#16161f] p-5">
+              <h2 className="text-sm font-black text-white mb-3 flex items-center gap-2">
+                <span className="text-[#00d4ff]">◆</span>
+                カテゴリから探す
+              </h2>
+              <div className="flex gap-2 flex-wrap">
+                {(Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][]).map(([key, label]) => (
+                  <Link
+                    key={key}
+                    href={`/category/${key}`}
+                    className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
+                      key === article.category
+                        ? 'bg-[#ff3a4f]/20 text-[#ff3a4f] border-[#ff3a4f]/30'
+                        : 'text-gray-500 border-[#2a2a3a] hover:border-[#ff3a4f] hover:text-[#ff3a4f]'
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             {/* Ad: After related articles */}
             {manga && <AdBanner manga={manga} variant={7} size="full" />}
@@ -246,27 +322,17 @@ export default async function ArticlePage({ params }: PageProps) {
       </div>
 
       {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: article.title,
-            description: article.excerpt,
-            datePublished: article.publishedAt,
-            author: {
-              '@type': 'Organization',
-              name: 'マンガ考察ラボ',
-            },
-            publisher: {
-              '@type': 'Organization',
-              name: 'マンガ考察ラボ',
-            },
-            keywords: article.tags.join(', '),
-          }),
-        }}
+      <ArticleJsonLd article={article} mangaTitle={manga?.title || ''} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'ホーム', url: 'https://manga-matome-site-phi.vercel.app' },
+          ...(manga
+            ? [{ name: manga.title, url: `https://manga-matome-site-phi.vercel.app/manga/${manga.slug}` }]
+            : []),
+          { name: article.title, url: `https://manga-matome-site-phi.vercel.app/article/${article.slug}` },
+        ]}
       />
+      <FaqJsonLd questions={buildFaqFromSections(article.sections, manga?.title || '')} />
     </>
   );
 }

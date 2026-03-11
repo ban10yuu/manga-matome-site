@@ -102,3 +102,29 @@ export function searchArticles(query: string): Article[] {
       a.tags.some(t => t.toLowerCase().includes(q))
   );
 }
+
+export function getAllTags(): string[] {
+  const tagSet = new Set<string>();
+  publishedArticles.forEach(a => a.tags.forEach(t => tagSet.add(t)));
+  return Array.from(tagSet).sort();
+}
+
+export function getArticlesByTag(tag: string): Article[] {
+  return publishedArticles
+    .filter(a => a.tags.includes(tag))
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+}
+
+export function tagToSlug(tag: string): string {
+  return encodeURIComponent(tag.toLowerCase().replace(/\s+/g, '-'));
+}
+
+export function slugToTag(slug: string): string | undefined {
+  const decoded = decodeURIComponent(slug);
+  const allTags = getAllTags();
+  // Exact match first
+  const exact = allTags.find(t => t === decoded);
+  if (exact) return exact;
+  // Slug-based match
+  return allTags.find(t => t.toLowerCase().replace(/\s+/g, '-') === decoded);
+}
