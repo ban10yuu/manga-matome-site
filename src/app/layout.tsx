@@ -4,8 +4,6 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const episodeKeywords = Array.from({ length: 2000 }, (_, i) => `${i + 1}話 伏線`);
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://manga-matome-site-phi.vercel.app'),
   title: {
@@ -98,7 +96,6 @@ export const metadata: Metadata = {
     '東京リベンジャーズ ネタバレ',
     'ワンパンマン 考察',
     'ワンパンマン ネタバレ',
-    ...episodeKeywords,
   ],
   openGraph: {
     type: 'website',
