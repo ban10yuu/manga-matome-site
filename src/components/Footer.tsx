@@ -117,6 +117,15 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-[#2a2a3a] text-center text-xs text-gray-600">
+          <div className="flex justify-center gap-4 mb-4">
+            <Link href="/privacy" className="text-gray-500 hover:text-[#ff3a4f] transition-colors">
+              プライバシーポリシー
+            </Link>
+            <span className="text-gray-700">|</span>
+            <Link href="/contact" className="text-gray-500 hover:text-[#ff3a4f] transition-colors">
+              お問い合わせ
+            </Link>
+          </div>
           <p>※ 当サイトの考察は個人の見解であり、公式の情報ではありません。</p>
           <p className="mt-1">※ 当サイトはアフィリエイトプログラムに参加しています。</p>
           <p className="mt-4 text-gray-500">&copy; {new Date().getFullYear()} マンガ考察ラボ — 漫画考察・ネタバレ・伏線分析の専門サイト</p>
