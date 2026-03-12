@@ -13,6 +13,7 @@ import ArticleCard from '@/components/ArticleCard';
 import Sidebar from '@/components/Sidebar';
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd, buildFaqFromSections } from '@/components/JsonLd';
 import AuthorBox from '@/components/AuthorBox';
+import ShareButtons from '@/components/ShareButtons';
 
 const DARK_CATEGORY_COLORS: Record<string, string> = {
   character: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
@@ -223,6 +224,9 @@ export default async function ArticlePage({ params }: PageProps) {
 
               {/* Author Box */}
               <AuthorBox />
+
+              {/* Share Buttons */}
+              <ShareButtons title={article.title} />
 
               {/* Tags */}
               <div className="flex items-center gap-2 flex-wrap mt-8 pt-6 border-t border-[#2a2a3a]">
