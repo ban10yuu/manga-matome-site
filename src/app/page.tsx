@@ -96,6 +96,52 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 人気記事 — SEO内部リンク強化 */}
+      <section className="bg-[#0c0c14] border-b border-[#2a2a3a] py-8">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="text-sm font-black text-white mb-4 flex items-center gap-2">
+            <span className="text-[#ff3a4f]">▎</span>
+            人気記事ランキング
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {(() => {
+              // Pick popular articles across different manga series for link diversity
+              const seen = new Set(featuredArticles.map(a => a.slug));
+              const seenManga = new Set<string>();
+              const popularArticles: typeof articles = [];
+              for (const a of articles) {
+                if (popularArticles.length >= 8) break;
+                if (seen.has(a.slug)) continue;
+                if (seenManga.has(a.mangaSlug) && popularArticles.length < 6) continue;
+                popularArticles.push(a);
+                seen.add(a.slug);
+                seenManga.add(a.mangaSlug);
+              }
+              return popularArticles.map((article, idx) => {
+                const manga = mangaList.find(m => m.slug === article.mangaSlug);
+                return (
+                  <Link
+                    key={article.slug}
+                    href={`/article/${article.slug}`}
+                    className="group flex items-start gap-3 manga-panel !bg-[#16161f] p-3 hover:!border-[#ff3a4f]"
+                  >
+                    <span className="text-lg font-black text-[#ff3a4f] opacity-60 flex-shrink-0 w-6 text-right">
+                      {idx + 1}
+                    </span>
+                    <div className="min-w-0">
+                      <span className="text-[10px] text-gray-600">{manga?.title}</span>
+                      <h3 className="text-xs font-bold text-gray-300 group-hover:text-[#ff3a4f] transition-colors line-clamp-2 leading-snug mt-0.5">
+                        {article.title}
+                      </h3>
+                    </div>
+                  </Link>
+                );
+              });
+            })()}
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
       <section className="mx-auto max-w-7xl px-4 py-10 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8">
