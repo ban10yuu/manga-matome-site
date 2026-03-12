@@ -6,7 +6,7 @@ import GoogleAd from '@/components/GoogleAd';
 import Sidebar from '@/components/Sidebar';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 
-const SITE_URL = 'https://manga-matome-site-phi.vercel.app';
+const SITE_URL = 'https://manga-matome-site.vercel.app';
 
 interface PageProps {
   params: Promise<{ slug: string }>;

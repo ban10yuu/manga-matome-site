@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 
-const SITE_URL = 'https://manga-matome-site-phi.vercel.app';
+const SITE_URL = 'https://manga-matome-site.vercel.app';
 
 export const metadata: Metadata = {
   title: 'プライバシーポリシー',

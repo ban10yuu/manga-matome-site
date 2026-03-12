@@ -1,7 +1,7 @@
 import { Article, MangaInfo, CATEGORY_LABELS } from '@/lib/types';
 
 const SITE_NAME = 'マンガ考察ラボ';
-const SITE_URL = 'https://manga-matome-site-phi.vercel.app';
+const SITE_URL = 'https://manga-matome-site.vercel.app';
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();

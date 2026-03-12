@@ -195,10 +195,10 @@ export default function Home() {
             '@type': 'WebSite',
             name: 'マンガ考察ラボ',
             description: '人気漫画の考察・伏線・キャラクター分析をお届けする漫画考察専門サイト',
-            url: 'https://manga-matome.vercel.app',
+            url: 'https://manga-matome-site.vercel.app',
             potentialAction: {
               '@type': 'SearchAction',
-              target: 'https://manga-matome.vercel.app/category/all?q={search_term_string}',
+              target: 'https://manga-matome-site.vercel.app/category/all?q={search_term_string}',
               'query-input': 'required name=search_term_string',
             },
           }),

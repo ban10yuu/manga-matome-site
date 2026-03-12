@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const manga = getMangaBySlug(slug);
   if (!manga) return {};
 
-  const canonicalUrl = `https://manga-matome-site-phi.vercel.app/manga/${slug}`;
+  const canonicalUrl = `https://manga-matome-site.vercel.app/manga/${slug}`;
   return {
     title: `${manga.title}の考察・ネタバレまとめ`,
     description: `${manga.title}（${manga.author}）の考察・伏線・キャラクター分析記事一覧。${manga.description}`,
@@ -143,8 +143,8 @@ export default async function MangaPage({ params }: PageProps) {
       <MangaPageJsonLd manga={manga} articleCount={articles.length} />
       <BreadcrumbJsonLd
         items={[
-          { name: 'ホーム', url: 'https://manga-matome-site-phi.vercel.app' },
-          { name: manga.title, url: `https://manga-matome-site-phi.vercel.app/manga/${manga.slug}` },
+          { name: 'ホーム', url: 'https://manga-matome-site.vercel.app' },
+          { name: manga.title, url: `https://manga-matome-site.vercel.app/manga/${manga.slug}` },
         ]}
       />
     </>

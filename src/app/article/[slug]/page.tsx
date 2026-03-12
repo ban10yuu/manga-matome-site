@@ -12,6 +12,7 @@ import CommentSection from '@/components/CommentSection';
 import ArticleCard from '@/components/ArticleCard';
 import Sidebar from '@/components/Sidebar';
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd, buildFaqFromSections } from '@/components/JsonLd';
+import AuthorBox from '@/components/AuthorBox';
 
 const DARK_CATEGORY_COLORS: Record<string, string> = {
   character: 'bg-blue-500/20 text-blue-300 border border-blue-500/30',
@@ -57,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     'マンガ考察',
   ];
 
-  const canonicalUrl = `https://manga-matome-site-phi.vercel.app/article/${slug}`;
+  const canonicalUrl = `https://manga-matome-site.vercel.app/article/${slug}`;
   return {
     title: article.title,
     description,
@@ -220,6 +221,9 @@ export default async function ArticlePage({ params }: PageProps) {
               {/* Ad: After main widget */}
               {manga && <AdBanner manga={manga} variant={5} size="full" />}
 
+              {/* Author Box */}
+              <AuthorBox />
+
               {/* Tags */}
               <div className="flex items-center gap-2 flex-wrap mt-8 pt-6 border-t border-[#2a2a3a]">
                 <span className="text-xs text-gray-600 font-bold">タグ:</span>
@@ -325,11 +329,11 @@ export default async function ArticlePage({ params }: PageProps) {
       <ArticleJsonLd article={article} mangaTitle={manga?.title || ''} />
       <BreadcrumbJsonLd
         items={[
-          { name: 'ホーム', url: 'https://manga-matome-site-phi.vercel.app' },
+          { name: 'ホーム', url: 'https://manga-matome-site.vercel.app' },
           ...(manga
-            ? [{ name: manga.title, url: `https://manga-matome-site-phi.vercel.app/manga/${manga.slug}` }]
+            ? [{ name: manga.title, url: `https://manga-matome-site.vercel.app/manga/${manga.slug}` }]
             : []),
-          { name: article.title, url: `https://manga-matome-site-phi.vercel.app/article/${article.slug}` },
+          { name: article.title, url: `https://manga-matome-site.vercel.app/article/${article.slug}` },
         ]}
       />
       <FaqJsonLd questions={buildFaqFromSections(article.sections, manga?.title || '')} />

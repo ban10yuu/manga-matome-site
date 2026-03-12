@@ -1,11 +1,18 @@
 import type { Metadata } from 'next';
+import { Noto_Sans_JP } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+const notoSansJP = Noto_Sans_JP({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://manga-matome-site-phi.vercel.app'),
+  metadataBase: new URL('https://manga-matome-site.vercel.app'),
   title: {
     default: 'マンガ考察ラボ｜人気漫画の考察・ネタバレ・伏線・キャラクター分析まとめ',
     template: '%s｜マンガ考察ラボ',
@@ -103,7 +110,7 @@ export const metadata: Metadata = {
     siteName: 'マンガ考察ラボ',
     title: 'マンガ考察ラボ｜人気漫画の考察・ネタバレ・伏線・キャラクター分析まとめ',
     description: 'ONE PIECE、呪術廻戦、チェンソーマンなど人気漫画20作品の考察・ネタバレ・伏線回収・キャラクター分析を徹底解説。名シーンの深読みから最新話の展開予想まで。',
-    url: 'https://manga-matome-site-phi.vercel.app',
+    url: 'https://manga-matome-site.vercel.app',
   },
   twitter: {
     card: 'summary_large_image',
@@ -122,7 +129,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://manga-matome-site-phi.vercel.app',
+    canonical: 'https://manga-matome-site.vercel.app',
   },
   verification: {
     google: 'QNT_EwkmJ039_aVzqr1sKc_hySyn-ZpgLZDtAgxtsNo',
@@ -155,7 +162,19 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'マンガ考察ラボ',
-              url: 'https://manga-matome-site-phi.vercel.app',
+              url: 'https://manga-matome-site.vercel.app',
+              description: 'ONE PIECE、呪術廻戦、チェンソーマンなど人気漫画20作品の考察・ネタバレ・伏線回収・キャラクター分析を徹底解説する漫画考察専門サイト',
+              publisher: {
+                '@type': 'Organization',
+                name: 'マンガ考察ラボ',
+                url: 'https://manga-matome-site.vercel.app',
+              },
+              inLanguage: 'ja',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://manga-matome-site.vercel.app/category/all?q={search_term_string}',
+                'query-input': 'required name=search_term_string',
+              },
             }),
           }}
         />
@@ -164,14 +183,8 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#1a1a2e" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className="antialiased min-h-screen flex flex-col">
+      <body className={`${notoSansJP.className} antialiased min-h-screen flex flex-col`}>
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

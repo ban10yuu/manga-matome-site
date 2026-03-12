@@ -82,6 +82,6 @@ Vercelの場合:
 ## Googleサーチコンソール登録
 
 1. https://search.google.com/search-console
-2. プロパティを追加 (URL: https://manga-matome.vercel.app)
+2. プロパティを追加 (URL: https://manga-matome-site.vercel.app)
 3. 所有権確認 (HTMLタグ方式が簡単)
-4. サイトマップ送信: `https://manga-matome.vercel.app/sitemap.xml`
+4. サイトマップ送信: `https://manga-matome-site.vercel.app/sitemap.xml`

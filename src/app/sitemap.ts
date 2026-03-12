@@ -4,7 +4,7 @@ import { mangaList } from '@/data/manga';
 
 export const dynamic = 'force-static';
 
-const SITE_URL = 'https://manga-matome-site-phi.vercel.app';
+const SITE_URL = 'https://manga-matome-site.vercel.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const articles = getAllArticles();
