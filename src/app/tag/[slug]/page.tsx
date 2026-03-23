@@ -48,7 +48,7 @@ export default async function TagPage({ params }: PageProps) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-8 relative z-10">
         <div className="text-center py-16">
-          <p className="text-gray-500 text-lg mb-2">タグが見つかりませんでした</p>
+          <p className="text-gray-400 text-lg mb-2">タグが見つかりませんでした</p>
           <Link href="/tags" className="text-sm text-[#ff3a4f] hover:text-[#ffd23f] font-bold">
             タグ一覧に戻る
           </Link>
@@ -91,17 +91,24 @@ export default async function TagPage({ params }: PageProps) {
           <div className="flex-1 min-w-0">
             {articles.length === 0 ? (
               <div className="text-center py-16">
-                <p className="text-gray-500 text-lg mb-2">記事が見つかりませんでした</p>
+                <p className="text-gray-400 text-lg mb-2">記事が見つかりませんでした</p>
                 <Link href="/tags" className="text-sm text-[#ff3a4f] hover:text-[#ffd23f] font-bold">
                   タグ一覧に戻る
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {articles.map(article => (
-                  <ArticleCard key={article.slug} article={article} />
-                ))}
-              </div>
+              <>
+                <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
+                  <span className="text-[#ff3a4f]">▎</span>
+                  「{tag}」の記事一覧
+                  <span className="text-sm font-normal text-gray-600">({articles.length}件)</span>
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {articles.map(article => (
+                    <ArticleCard key={article.slug} article={article} />
+                  ))}
+                </div>
+              </>
             )}
 
             {/* GoogleAd: After articles */}

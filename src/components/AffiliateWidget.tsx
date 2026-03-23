@@ -31,7 +31,7 @@ export default function AffiliateWidget({ manga }: { manga: MangaInfo }) {
               『{manga.title}』を読むなら
             </h3>
           </div>
-          <p className="text-xs text-gray-500">各サービスのキャンペーンを利用してお得に読めます</p>
+          <p className="text-xs text-gray-400">各サービスのキャンペーンを利用してお得に読めます</p>
         </div>
       </div>
 

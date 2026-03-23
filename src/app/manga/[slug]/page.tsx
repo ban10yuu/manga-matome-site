@@ -57,7 +57,7 @@ export default async function MangaPage({ params }: PageProps) {
         >
           {mangaHasImage(slug) ? (
             <div className="absolute inset-0">
-              <img src={`/images/manga/${slug}.jpg`} alt="" className="w-full h-full object-cover opacity-30" />
+              <img src={`/images/manga/${slug}.jpg`} alt={`${manga.title}の考察イメージ`} className="w-full h-full object-cover opacity-30" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#16161f] via-[#16161f]/80 to-transparent" />
             </div>
           ) : (
@@ -73,14 +73,14 @@ export default async function MangaPage({ params }: PageProps) {
               <span className="text-gray-400">{manga.title}</span>
             </nav>
             <h1 className="text-2xl md:text-3xl font-black text-white mb-2">{manga.title}</h1>
-            <p className="text-sm text-gray-500 mb-3">
+            <p className="text-sm text-gray-400 mb-3">
               <span className="text-gray-400">作者：{manga.author}</span>
               <span className="mx-2 text-gray-700">|</span>
               <span style={{ color: manga.coverColor }}>{manga.status === 'ongoing' ? '連載中' : '完結済み'}</span>
               <span className="mx-2 text-gray-700">|</span>
-              <span className="text-gray-500">{manga.genre.join(' / ')}</span>
+              <span className="text-gray-400">{manga.genre.join(' / ')}</span>
             </p>
-            <p className="text-sm text-gray-500 max-w-2xl leading-relaxed">{manga.description}</p>
+            <p className="text-sm text-gray-400 max-w-2xl leading-relaxed">{manga.description}</p>
 
             {/* Affiliate Links */}
             <div className="flex flex-wrap gap-2 mt-4">

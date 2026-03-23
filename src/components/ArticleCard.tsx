@@ -22,7 +22,7 @@ export default function ArticleCard({ article, showManga = true }: { article: Ar
         <Link href={`/article/${article.slug}`} className="block relative h-32 overflow-hidden rounded-t">
           <img
             src={`/images/manga/${article.mangaSlug}.jpg`}
-            alt=""
+            alt={`${manga?.title || article.mangaSlug} - ${article.title}`}
             className="w-full h-full object-cover"
             loading="lazy"
           />

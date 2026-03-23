@@ -79,14 +79,14 @@ export default function AdBanner({
                   className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: color, boxShadow: `0 0 12px ${color}80` }}
                 />
-                <span className="text-xs font-bold text-gray-500">PR</span>
+                <span className="text-xs font-bold text-gray-400">PR</span>
               </div>
               <div className="text-lg md:text-xl font-black text-white mb-1">
                 {link.label.replace('で読む', '')}
               </div>
               <p className="text-sm text-gray-400 mb-3">{tagline}</p>
               {title && (
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   『{title}』を今すぐ読める
                 </p>
               )}
@@ -158,7 +158,7 @@ export default function AdBanner({
             <div className="text-base font-black text-white mb-1">
               {link.label.replace('で読む', '')}
             </div>
-            <p className="text-xs text-gray-500 mb-4">{tagline}</p>
+            <p className="text-xs text-gray-400 mb-4">{tagline}</p>
 
             {/* CTA */}
             <div
@@ -202,7 +202,7 @@ export default function AdBanner({
               <span className="text-[10px] text-gray-600">PR</span>
               <span className="text-sm font-bold text-white">{link.label.replace('で読む', '')}</span>
             </div>
-            <p className="text-xs text-gray-500 truncate">{tagline}</p>
+            <p className="text-xs text-gray-400 truncate">{tagline}</p>
           </div>
           {link.badge && (
             <span
@@ -212,7 +212,7 @@ export default function AdBanner({
               {link.badge}
             </span>
           )}
-          <svg className="w-5 h-5 text-gray-500 group-hover:text-white transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </div>

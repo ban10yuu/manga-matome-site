@@ -30,7 +30,7 @@ export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
                 <span className={`rank-badge ${i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other'}`}>
                   {i + 1}
                 </span>
-                <span className="text-xs text-gray-500 group-hover:text-[#ff3a4f] transition-colors leading-snug line-clamp-2">
+                <span className="text-xs text-gray-400 group-hover:text-[#ff3a4f] transition-colors leading-snug line-clamp-2">
                   {article.title}
                 </span>
               </Link>
@@ -115,7 +115,7 @@ export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
             <Link
               key={key}
               href={`/category/${key}`}
-              className="block py-1 text-xs text-gray-500 hover:text-[#ff3a4f] transition-colors"
+              className="block py-1 text-xs text-gray-400 hover:text-[#ff3a4f] transition-colors"
             >
               {label}
             </Link>
@@ -133,7 +133,7 @@ export default function Sidebar({ manga }: { manga?: MangaInfo | null }) {
             <Link
               key={m.slug}
               href={`/manga/${m.slug}`}
-              className="flex items-center gap-2 py-1 text-xs text-gray-500 hover:text-white transition-colors"
+              className="flex items-center gap-2 py-1 text-xs text-gray-400 hover:text-white transition-colors"
             >
               <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: m.coverColor }} />
               {m.title}

@@ -118,7 +118,7 @@ export default function Header() {
               キャラ考察
             </Link>
             <div className="mt-3 border-t border-[#2a2a3a] pt-3">
-              <p className="text-xs text-gray-500 mb-2 font-bold">作品一覧</p>
+              <p className="text-xs text-gray-400 mb-2 font-bold">作品一覧</p>
               <div className="grid grid-cols-2 gap-1">
                 {mangaList.slice(0, 10).map(manga => (
                   <Link

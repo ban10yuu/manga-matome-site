@@ -44,7 +44,7 @@ export default function MangaProductCard({ manga }: { manga: MangaInfo }) {
           <p className="text-sm font-bold text-gray-300 mb-1">
             {manga.title} 1
           </p>
-          <p className="text-xs text-gray-500 mb-5">
+          <p className="text-xs text-gray-400 mb-5">
             {manga.author}
           </p>
 

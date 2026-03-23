@@ -120,7 +120,7 @@ export default async function ArticlePage({ params }: PageProps) {
                     <span className="text-gray-700">/</span>
                   </>
                 )}
-                <span className="text-gray-500 line-clamp-1">{article.title}</span>
+                <span className="text-gray-400 line-clamp-1">{article.title}</span>
               </nav>
 
               {/* Meta */}
@@ -165,7 +165,7 @@ export default async function ArticlePage({ params }: PageProps) {
                       <li key={i}>
                         <a
                           href={`#section-${i}`}
-                          className="text-sm text-gray-500 hover:text-[#ff3a4f] transition-colors flex items-center gap-2"
+                          className="text-sm text-gray-400 hover:text-[#ff3a4f] transition-colors flex items-center gap-2"
                         >
                           <span className="text-[10px] font-black text-gray-600 w-5 text-right">{String(i + 1).padStart(2, '0')}</span>
                           {section.heading}
@@ -235,7 +235,7 @@ export default async function ArticlePage({ params }: PageProps) {
                   <Link
                     key={tag}
                     href={`/tag/${tagToSlug(tag)}`}
-                    className="text-[10px] text-gray-500 bg-[#1e1e2a] border border-[#2a2a3a] px-2.5 py-1 rounded hover:text-[#ff3a4f] hover:border-[#ff3a4f]/30 transition-colors"
+                    className="text-[10px] text-gray-400 bg-[#1e1e2a] border border-[#2a2a3a] px-2.5 py-1 rounded hover:text-[#ff3a4f] hover:border-[#ff3a4f]/30 transition-colors"
                   >
                     #{tag}
                   </Link>
@@ -307,7 +307,7 @@ export default async function ArticlePage({ params }: PageProps) {
                     className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
                       key === article.category
                         ? 'bg-[#ff3a4f]/20 text-[#ff3a4f] border-[#ff3a4f]/30'
-                        : 'text-gray-500 border-[#2a2a3a] hover:border-[#ff3a4f] hover:text-[#ff3a4f]'
+                        : 'text-gray-400 border-[#2a2a3a] hover:border-[#ff3a4f] hover:text-[#ff3a4f]'
                     }`}
                   >
                     {label}
